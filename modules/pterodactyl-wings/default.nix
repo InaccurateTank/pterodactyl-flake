@@ -6,7 +6,7 @@ let
 
   cfg = config.services.pterodactyl.wings;
   configuration = ''
-    # /etc/pterodactyl/configuration.yml managed by NixOS
+    # /etc/pterodactyl/config.yml managed by NixOS
   '' + "${cfg.configuration}";
 in {
   options.services.pterodactyl.wings = {
@@ -30,7 +30,10 @@ in {
 
   config = mkIf cfg.enable {
     virtualisation.docker.enable = true;
-    environment.etc."pterodactyl/config.yml".text = configuration;
+    environment.etc."pterodactyl/config.yml" = {
+      text = configuration;
+      mode = "0700";
+    };
 
     systemd.services."pterodactyl-wings" = {
       description = "Pterodactyl Wings Daemon";
