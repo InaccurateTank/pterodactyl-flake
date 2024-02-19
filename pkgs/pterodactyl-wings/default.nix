@@ -1,11 +1,12 @@
-{ lib, buildGoModule, fetchFromGitHub }:
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub
+}:
 
-with lib;
-let
-  version = "1.11.8";
-in buildGoModule {
+buildGoModule rec {
   pname = "pterodactyl-wings";
-  inherit version;
+  version = "1.11.8";
 
   meta = with lib; {
     homepage = "https://pterodactyl.io/";

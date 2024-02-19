@@ -5,9 +5,6 @@ let
   inherit (flake.packages.${pkgs.stdenv.hostPlatform.system}) pterodactyl-wings;
 
   cfg = config.services.pterodactyl.wings;
-  configuration = ''
-    # /etc/pterodactyl/config.yml managed by NixOS
-  '' + "${cfg.configuration}";
 in {
   options.services.pterodactyl.wings = {
     enable = mkEnableOption ''
@@ -15,7 +12,12 @@ in {
     '';
 
     configuration = mkOption {
-      type = types.str;
+      type = with types; nullOr lines;
+      default = null;
+    };
+
+    configurationFile = mkOption {
+      type = with types; nullOr (either str path);
       default = null;
     };
 
@@ -29,9 +31,17 @@ in {
   };
 
   config = mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = (cfg.configuration != null && cfg.configurationFile == null) || (cfg.configuration == null && cfg.configurationFile != null);
+        message = "Either configuration or configurationFile must be used while wings is enabled.";
+      }
+    ];
+
     virtualisation.docker.enable = true;
     environment.etc."pterodactyl/config.yml" = {
-      text = configuration;
+      text = mkIf (cfg.configuration != null) cfg.configuration;
+      source = mkIf (cfg.configurationFile != null) cfg.configurationFile;
       mode = "0700";
     };
 
@@ -50,7 +60,7 @@ in {
         PIDFile = "/var/run/wings/daemon.pid";
         ExecStart = "${cfg.package}/bin/wings";
         Restart = "on-failure";
-        RestartSec=5;
+        RestartSec = 5;
       };
     };
   };
