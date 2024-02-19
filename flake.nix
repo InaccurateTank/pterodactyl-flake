@@ -14,14 +14,14 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in {
-      nixosModules.pterodactyl-wings = import ./modules/pterodactyl-wings self;
+      nixosModules.pterodactyl-wings = import ./modules/wings self;
       packages = forAllSystems (system:
         let pkgs = nixpkgsFor.${system};
         in {
-          pterodactyl-wings = pkgs.callPackage ./pkgs/pterodactyl-wings {
+          wings = pkgs.callPackage ./pkgs/wings {
             buildGoModule = pkgs.buildGo120Module;
           };
-          default = self.packages.${system}.pterodactyl-wings;
+          panel = pkgs.callPackage ./pkgs/panel {};
         });
     };
 }

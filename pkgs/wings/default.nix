@@ -5,7 +5,7 @@
 }:
 
 buildGoModule rec {
-  pname = "pterodactyl-wings";
+  pname = "wings";
   version = "1.11.8";
 
   meta = with lib; {
