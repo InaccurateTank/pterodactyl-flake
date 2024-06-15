@@ -6,7 +6,7 @@
 
 buildGoModule rec {
   pname = "wings";
-  version = "1.11.8";
+  version = "1.11.13";
 
   meta = with lib; {
     homepage = "https://pterodactyl.io/";
@@ -25,6 +25,8 @@ buildGoModule rec {
 
   CGO_ENABLED = 0;
   ldflags = [
-    "-s -w -X github.com/pterodactyl/wings/system.Version=${version}"
+    "-s"
+    "-w"
+    "-X github.com/pterodactyl/wings/system.Version=${version}"
   ];
 }
