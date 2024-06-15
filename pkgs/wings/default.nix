@@ -17,10 +17,10 @@ buildGoModule rec {
     owner = "pterodactyl";
     repo = "wings";
     rev = "v${version}";
-    hash = "sha256-JzbxROashDAL4NSeqMcWR9PgFqe9peBNpeofA347oE4=";
+    hash = "sha256-UpYUHWM2J8nH+srdKSpFQEaPx2Rj2+YdphV8jJXcoBU=";
   };
 
-  vendorHash = "sha256-fn+U91jX/rmL/gdMwRAIDEj/m0Zqgy81BUyv4El7Qxw=";
+  vendorHash = "sha256-eWfQE9cQ7zIkITWwnVu9Sf9vVFjkQih/ZW77d6p/Iw0=";
   subPackages = [ "." ];
 
   CGO_ENABLED = 0;

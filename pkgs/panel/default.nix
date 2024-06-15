@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/pterodactyl/panel/releases/download/v${version}/panel.tar.gz";
-    hash = "sha256-sByXwUd1yEdyXFSjO1mBvXfSJlZCqcJuZ0jZCIFLlLM=";
+    hash = "sha256-tBd0pscEa9/UMDlpxnANf0bwabUlDfrSX5G7w4nJwGM=";
   };
 
   sourceRoot = ".";

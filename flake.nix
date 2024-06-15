@@ -2,7 +2,7 @@
   description = "Pterodactyl Wings Daemon";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
   };
 
   outputs = { self, nixpkgs }:
@@ -19,7 +19,7 @@
         let pkgs = nixpkgsFor.${system};
         in {
           wings = pkgs.callPackage ./pkgs/wings {
-            buildGoModule = pkgs.buildGo120Module;
+            buildGoModule = pkgs.buildGo121Module;
           };
           panel = pkgs.callPackage ./pkgs/panel {};
         });
