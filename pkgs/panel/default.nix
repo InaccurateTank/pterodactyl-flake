@@ -6,7 +6,7 @@
 
 stdenv.mkDerivation rec {
   pname = "panel";
-  version = "1.11.5";
+  version = "1.11.7";
 
   meta = with lib; {
     homepage = "https://pterodactyl.io/";
